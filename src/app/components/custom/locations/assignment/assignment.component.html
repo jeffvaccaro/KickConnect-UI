@@ -1,0 +1,9 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Assignments: {{this.locationName}}</h5>
+</div>
+<mat-card class="mb-25 kickConnect-card">
+    <mat-card-content>
+        <daypilot-calendar [config]="configCalendar" [events]="customDPEvents" #calendar style="width: 100%; height: 600px;"></daypilot-calendar>
+    </mat-card-content>
+</mat-card>
+  

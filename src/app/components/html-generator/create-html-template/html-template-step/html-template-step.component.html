@@ -1,0 +1,117 @@
+
+  <ng-template matStepLabel>sectionTitle</ng-template>
+    <ng-template matStepContent>
+      <mat-stepper orientation="vertical">
+        <mat-step>
+          <!-- <ng-template matStepContent>
+            <p>How many columns are in this section?</p>
+            <mat-button-toggle-group name="sectionColumns" aria-label="How many columns to display" (change)="onColumnsChange($event)">
+              <mat-button-toggle value="1">One</mat-button-toggle>
+              <mat-button-toggle value="2">Two</mat-button-toggle>
+              <mat-button-toggle value="3">Three</mat-button-toggle>
+            </mat-button-toggle-group><br/><br/>
+            <button mat-flat-button color="primary" class="me-15" matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </ng-template> -->
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>{{sectionTitle}}: Background Image</ng-template>
+          <!-- <ng-template matStepContent>
+            <p>Add Background Image?</p>
+            <input type="file" (change)="onImageUpload($event,1,'background')"><br/><br/>
+            <p><button mat-flat-button color="primary" matStepperNext>Next</button></p>
+          </ng-template> -->
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>{{sectionTitle}}: Text</ng-template>
+          <!-- <ng-template matStepContent>
+            <div class="form-group">
+              <mat-slide-toggle id="isTextLightOrDark" (change)="switchColor($event)">Light/Dark Text</mat-slide-toggle>
+              <mat-form-field appearance="fill" class="full-width" *ngIf="col1">
+                <mat-label>Column 1: Header Text</mat-label>
+                <input matInput type="text" id="txtHeaderCol1" [(ngModel)]="col1HeaderText" (ngModelChange)="updateColBlockHTML()">
+              </mat-form-field>
+          
+              <mat-form-field appearance="fill" class="full-width" *ngIf="col1">
+                <mat-label>Column 1: Text</mat-label>
+                <textarea matInput id="txtarea1" rows="5" [(ngModel)]="col1TextBlock" (ngModelChange)="updateColBlockHTML()"></textarea>
+              </mat-form-field>
+          
+              <mat-form-field appearance="fill" class="full-width" *ngIf="col2">
+                <mat-label>Column 2: Header Text</mat-label>
+                <input matInput type="text" id="txtHeaderCol2" [(ngModel)]="col2HeaderText"  (ngModelChange)="updateColBlockHTML()">
+              </mat-form-field>
+          
+              <mat-form-field appearance="fill" class="full-width" *ngIf="col2">
+                <mat-card-content class="full-width" *ngIf="col2">                                            
+                  <mat-tab-group (selectedIndexChange)="onColTabChanged($event)">
+                    <mat-tab label="Text"><br>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Column 2: Header Text</mat-label>
+                        <input matInput type="text" id="txtHeaderCol2" [(ngModel)]="col2HeaderText" (ngModelChange)="updateColBlockHTML()">
+                      </mat-form-field>
+                  
+                      <mat-form-field appearance="fill" class="full-width" *ngIf="col2">
+                        <mat-label>Column 2: Text</mat-label>
+                        <textarea matInput id="txtarea2" rows="5" [(ngModel)]="col2TextBlock" (ngModelChange)="updateColBlockHTML()"></textarea>
+                      </mat-form-field>
+                    </mat-tab>
+                    <mat-tab label="Image"><br>
+                      <p>Add Column Image?</p>
+                      <input type="file" (change)="onImageUpload($event, 1, 'columns', 2)"><br/><br/>
+                    </mat-tab>
+                    <mat-tab label="Video"><br> Video</mat-tab>
+                  </mat-tab-group>
+                </mat-card-content>
+                </mat-form-field>
+
+              <mat-card-content class="full-width" *ngIf="col3">                                            
+                <mat-tab-group (selectedIndexChange)="onColTabChanged($event)">
+                  <mat-tab label="Text"><br>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Column 3: Header Text</mat-label>
+                      <input matInput type="text" id="txtHeaderCol3" [(ngModel)]="col3HeaderText" (ngModelChange)="updateColBlockHTML()">
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="fill" class="full-width" *ngIf="col3">
+                      <mat-label>Column 3: Text</mat-label>
+                      <textarea matInput id="txtarea3" rows="5" [(ngModel)]="col3TextBlock" (ngModelChange)="updateColBlockHTML()"></textarea>
+                    </mat-form-field>
+                  </mat-tab>
+                  <mat-tab label="Image"><br>
+                    <p>Add Column Image?</p>
+                    <input type="file" (change)="onImageUpload($event, 1, 'columns', 3)"><br/><br/>
+                  </mat-tab>
+                  <mat-tab label="Video"><br> Video</mat-tab>
+                </mat-tab-group>
+                <div class="button-group">
+                  <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+                  <button mat-flat-button color="primary" matStepperNext>Next</button>
+                </div>
+              </mat-card-content>
+            </div>
+          </ng-template> -->
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>{{sectionTitle}}: Menu</ng-template>
+          <!-- <ng-template matStepContent>
+            <form [formGroup]="menuForm" (submit)="addToHTML()">
+              <div formArrayName="menuItems">
+                <div *ngFor="let item of menuItems.controls; let i = index">
+                  <div class="form-group" [formGroupName]="i">
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Menu Item Name</mat-label>
+                      <input matInput type="text" id="txtMenuItemName" formControlName="name">
+                    </mat-form-field>
+                    <button type="submit">Add Menu</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </ng-template> -->
+        </mat-step>
+      </mat-stepper>
+    </ng-template>

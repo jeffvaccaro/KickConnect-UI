@@ -1,0 +1,39 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "outDir": "./dist/kickConnect",
+      "strict": true,
+      "noImplicitOverride": true,
+      "noPropertyAccessFromIndexSignature": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "strictPropertyInitialization": false,
+      "sourceMap": true,
+      "declaration": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "moduleResolution": "bundler",
+      "importHelpers": true,
+      "target": "ES2022",
+      "module": "ES2022",
+      "useDefineForClassFields": false,
+      "lib": [
+        "ES2022",
+        "dom"
+      ],
+      "baseUrl": "./src",
+      "paths": {
+        "@app/*": ["app/*"]
+      }
+    },
+    "angularCompilerOptions": {
+      "enableI18nLegacyMessageIdFormat": false,
+      "strictInjectionParameters": true,
+      "strictInputAccessModifiers": true,
+      "strictTemplates": true,
+      "skipTemplateCodegen": true
+    },
+    "include": ["src/**/*"]
+  }

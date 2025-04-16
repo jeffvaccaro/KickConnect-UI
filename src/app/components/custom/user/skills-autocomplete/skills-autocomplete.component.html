@@ -1,0 +1,33 @@
+<div class="col-lg-12 col-md-12">
+  <div class="kickConnect-form-group">
+    <mat-form-field appearance="fill">
+      <i class="ri-bookmark-2-line"></i>
+      <mat-label>Add Skills</mat-label>
+
+      <mat-chip-grid #chipGrid aria-label="Skills selection">
+        <mat-chip-row
+          *ngFor="let skillItem of skillsControl.value; trackBy: trackBySkill"
+          (removed)="remove(skillItem)">
+          {{ skillItem.skillName }}
+          <button matChipRemove [attr.aria-label]="'remove ' + skillItem.skillName">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input
+        placeholder="New Skill..."
+        #skillInput
+        [formControl]="currentSkillControl"
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let skillItemOption of filteredSkills; trackBy: trackBySkill" [value]="skillItemOption">
+          {{ skillItemOption.skillName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>

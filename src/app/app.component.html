@@ -1,0 +1,12 @@
+<div [ngClass]="{
+  'blank-page': isBlankPage()
+}" [class.card-bordered-theme]="themeService.isCardBorder()" [class.card-border-radius]="themeService.isCardBorderRadius()" [class.rtl-enabled]="themeService.isRTLEnabled()">
+  <app-sidebar *ngIf="!isBlankPage()"></app-sidebar>
+  <div class="main-content d-flex flex-column" [ngClass]="{'active': isToggled}" [class.right-sidebar]="themeService.isRightSidebar()" [class.hide-sidebar]="themeService.isHideSidebar()">
+    <app-header *ngIf="!isBlankPage()"></app-header>
+    <router-outlet></router-outlet>
+    <div class="flex-grow-1"></div>
+    <app-footer *ngIf="!isBlankPage()"></app-footer>
+  </div>
+  <app-customizer-settings *ngIf="!isBlankPage()"></app-customizer-settings>
+</div>

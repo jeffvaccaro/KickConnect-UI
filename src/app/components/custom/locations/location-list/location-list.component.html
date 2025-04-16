@@ -1,0 +1,74 @@
+<mat-card class="mb-25 kickConnect-card">
+    <h5 class="mb-0">Locations</h5><br/>
+    <mat-card-header>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms"  (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="Active" id="active"></mat-tab>
+            <mat-tab label="InActive" id="inActive"></mat-tab>
+            <mat-tab label="All" id="all"></mat-tab>
+        </mat-tab-group>        
+        <button mat-flat-button class="default-btn kickConnect" (click)="btnAddNewClick()"><i class="ri-add-fill"></i> Add</button>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="teamMembersListTable kickConnect-mat-table mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" id="locationsTable">
+                <!-- displayedColumns: string[] = ['Name','Address','City','State','Zip','Email', 'Phone']; -->
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">Name</th>
+                    <td mat-cell *matCellDef="let element" class="text-start" id="name">
+                        {{element.locationName}}
+                    </td>
+
+
+                </ng-container>
+
+                <!-- Address Column -->
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef>Address</th>
+                    <td mat-cell *matCellDef="let element" id="address">{{element.locationAddress}}</td>
+                </ng-container>                
+                
+                <!-- Phone Column -->
+                <ng-container matColumnDef="Phone">
+                    <th mat-header-cell *matHeaderCellDef>Phone</th>
+                    <td mat-cell *matCellDef="let element" id="phone">{{element.locationPhone}}</td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="Email">
+                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <td mat-cell *matCellDef="let element" id="email"><a href="mailto:{{element.locationEmail}}">{{element.locationEmail}}</a></td>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef>Action</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none ri-more-fill" [matMenuTriggerFor]="actionMenu">
+                            <i class="{{element.action}}"></i>
+                        </button>
+                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="editLocation(element.locationId)">
+                                <i class="ri-edit-line"></i> Edit
+                            </button>
+                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative" (click)="assignments(element.locationId)">
+                                <i class="ri-edit-line"></i> Assignments
+                            </button>
+                            <!-- <button mat-menu-item type="button" class="bg-transparent border-none position-relative" >
+                                <i class="ri-add-large-line"></i> Add Location
+                            </button> -->
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[4, 8, 12]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

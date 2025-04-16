@@ -1,0 +1,42 @@
+<mat-card class="mb-25 kickConnect-card">
+    <h5 class="mb-0">Accounts</h5><br/>
+    <mat-card-header>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms" (selectedTabChange)="onTabChange($event)">
+            <mat-tab label="Active"></mat-tab>
+            <mat-tab label="InActive"></mat-tab>
+        </mat-tab-group>        
+        <button mat-flat-button class="default-btn kickConnect" (click)="btnAddNewClick()"><i class="ri-add-fill"></i> Add</button>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="teamMembersListTable kickConnect-mat-table mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" id="accountsTable">
+                <ng-container matColumnDef="accountName">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let element" id="accountName">{{element.accountName}}</td>
+                </ng-container>                
+                <ng-container matColumnDef="accountPhone">
+                    <th mat-header-cell *matHeaderCellDef>Phone</th>
+                    <td mat-cell *matCellDef="let element" id="accountPhone">{{element.accountPhone}}</td>
+                </ng-container>
+                <ng-container matColumnDef="accountEmail">
+                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <td mat-cell *matCellDef="let element" id="accountEmail"><a href="mailto:{{element.accountEmail}}">{{element.accountEmail}}</a></td>
+                </ng-container>
+                <ng-container matColumnDef="accountAddress">
+                    <th mat-header-cell *matHeaderCellDef>Address</th>
+                    <td mat-cell *matCellDef="let element" id="accountAddress">{{element.accountAddress}} <br/> {{element.accountCity}},{{element.accountState}} {{element.accountZip}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" matTooltip="{{row.accountCode}}" matTooltipClass="no-wrap"(click)="copyToClipboard(row.accountCode)"></tr>
+                
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[4, 8, 12]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

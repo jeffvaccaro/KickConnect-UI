@@ -1,0 +1,38 @@
+@import '../../header.component.scss';
+
+/* user.component.css */
+.user-info {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  .user-initial {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Makes the element circular */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold; /* Makes the text bold */
+    margin-right: 10px; /* Space between the initial and the role container */
+  }
+  
+  .role-container {
+    display: flex;
+    flex-direction: column; /* Stack roleName and userName vertically */
+  }
+  
+  .role-name {
+    font-size: 14px; /* Adjust the font size as needed */
+    color: #333; /* Text color */
+    margin-bottom: 2px; /* Space between roleName and userName */
+  }
+  
+  .user-name {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: #333; /* Text color */
+  }
+  

@@ -1,0 +1,79 @@
+<div class="create-dialog-box">
+  <div class="title d-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Profile Information</h4>
+    <button class="close-btn bg-transparent p-0 border-none" (click)="onCancel()"><i class="flaticon-close"></i></button>
+  </div>
+  <form *ngIf="formReady" [formGroup]="profileForm">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="kickConnect-form-group">
+          <mat-form-field appearance="fill">
+            <i class="ri-bookmark-2-line"></i>
+            <mat-label>Profile Description</mat-label>
+            <textarea matInput formControlName="profileDescription" rows="3"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="kickConnect-form-group">
+          <mat-form-field appearance="fill">
+            <i class="ri-bookmark-2-line"></i>
+            <mat-label>Profile URL</mat-label>
+            <input matInput formControlName="profileURL">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="kickConnect-form-group">
+          <app-skills-autocomplete 
+            [initialSkills]="profileForm.get('profileSkills')?.value"
+            (skillCollection)="onSkillsChanged($event)">
+          </app-skills-autocomplete>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-5 col-md-2">
+        <div class="kickConnect-form-group">
+          <mat-form-field appearance="fill">
+            <i class="ri-bookmark-2-line"></i>
+            <mat-label>Primary Studio</mat-label>
+            <mat-select formControlName="primaryStudio" (selectionChange)="primaryLocationChange($event)">
+              <mat-option *ngFor="let location of locationArr; trackBy: trackByLocationId" [value]="location.locationId">
+                {{ location.locationName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-lg-7 col-md-6">
+        <div class="kickConnect-form-group">
+          <mat-form-field appearance="fill">
+            <i class="ri-list-check"></i>
+            <mat-label>Secondary Studio(s)</mat-label>
+            <mat-select formControlName="altStudio" multiple>
+              <mat-option *ngFor="let location of secLocArr; trackBy: trackByLocationId" [value]="location.locationId" [disabled]="location.disabled">
+                {{ location.locationName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>              
+
+    <div class="sticky-buttons">
+      <div mat-dialog-actions>
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button (click)="onSave()">Save</button>
+      </div>
+    </div>          
+  </form>
+</div>

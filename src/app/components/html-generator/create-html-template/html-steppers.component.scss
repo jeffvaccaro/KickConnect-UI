@@ -1,0 +1,16 @@
+.full-width {
+    width: 100%;
+    display: block;
+  }
+  
+  .mat-form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }

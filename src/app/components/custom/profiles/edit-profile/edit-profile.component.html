@@ -1,0 +1,25 @@
+<div class="row" *ngIf="user">
+    <div class="col-lg-4 col-md-6">
+        <mat-card class="mb-50">
+            <mat-card-header class="mb-25">
+                <mat-card-title-group>
+                    <mat-card-title class="fw-semibold mb-10">{{user.name}}</mat-card-title>
+                    <mat-card-subtitle>{{user.city}}</mat-card-subtitle>
+                    <img mat-card-xl-image [src]="user.photoURL" class="card-image" >
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-header>
+                <mat-card-title class="fw-smibold mb-10">Description:</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{user.profileDescription}}</p>
+            </mat-card-content>
+            <mat-card-header>
+                <mat-card-title class="fw-smibold mb-10">Skills:</mat-card-title>
+            </mat-card-header>            
+            <mat-card-content>
+                <p>{{user.profileSkills}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

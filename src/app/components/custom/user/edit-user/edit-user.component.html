@@ -1,0 +1,152 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Edit User</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/">
+          <i class="ri-home-8-line"></i>
+          Dashboard
+        </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Edit User</li>
+    </ol>
+  </div>
+  <mat-card class="mb-25 kickConnect-card">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <label class="d-block mb-12 fw-semibold gray-color">Upload Image</label>
+                <div class="d-flex align-items-center">
+                    <div *ngIf="imageSrc" class="image-preview">
+                        <img [src]="imageSrc" alt="Image Preview" style="max-width: 200px; max-height: 200px;">
+                    </div>
+                    <img *ngIf="!imageSrc" src="assets/img/user/user15.jpg" class="rounded-circle image-preview" width="110" alt="user">
+                    <div class="kickConnect-form-group" style="padding-left:15px;">
+                        
+                        <input type="file" class="input-control" (change)="onFileSelected($event)">
+                    </div>
+                </div>  
+            </div>      
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="kickConnect-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Name</label>
+                    <mat-form-field appearance="fill">
+                    <i class="ri-user-3-line"></i>
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="nameControl">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="kickConnect-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Role</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-list-check"></i>
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="roleControl" multiple (selectionChange)="onRoleChange($event)">
+                            <mat-option *ngFor="let role of roleArr; trackBy: trackByRoleId" [value]="role.roleId">
+                              {{ role.roleName }}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2" >
+                <div class="kickConnect-form-group" *ngIf="isInstructorCheck()">
+                    <label class="d-block mb-12 fw-semibold gray-color">Update Profile</label>
+                    <button mat-flat-button class="kickConnect fw-semibold" type="button" (click)="openInstructorModal()">
+                        <mat-icon>perm_identity</mat-icon>Profile
+                      </button>
+                      
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="kickConnect-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                    <mat-form-field appearance="fill">
+                    <i class="ri-mail-line"></i>
+                    <mat-label>Enter email address</mat-label>
+                    <input matInput formControlName="emailControl">
+                    <div *ngIf="form.get('emailControl')?.invalid && (form.get('emailControl')?.dirty || form.get('emailControl')?.touched)">
+                        <div *ngIf="form.get('emailControl')?.errors?.['required']">Email is required.</div>
+                        <div *ngIf="form.get('emailControl')?.errors?.['email']">Please enter a valid email address.</div>
+                    </div>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="kickConnect-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                    <mat-form-field appearance="fill">
+                    <i class="ri-phone-line"></i>
+                    <mat-label>Enter phone number</mat-label>
+                    <input matInput formControlName="phoneControl">
+                        <div *ngIf="form.get('phoneControl')?.invalid && (form.get('phoneControl')?.dirty || form.get('phoneControl')?.touched)">
+                            <div *ngIf="form.get('phoneControl')?.errors?.['required']">Phone Number is required.</div>
+                            <div *ngIf="form.get('phoneControl')?.errors?.['pattern']">Please enter a valid Phone Number.</div>
+                        </div>                       
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="kickConnect-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Address</label>
+                    <mat-form-field appearance="fill">
+                    <i class="ri-map-pin-line"></i>
+                    <mat-label>Enter Address</mat-label>
+                    <input matInput formControlName="addressControl">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="kickConnect-form-group without-icon">
+                <label class="d-block mb-12 fw-semibold gray-color">City</label>
+                <mat-form-field appearance="fill">
+                <mat-label>Enter city</mat-label>
+                <input matInput formControlName="cityControl" readonly>
+                </mat-form-field>
+            </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="kickConnect-form-group without-icon">
+                <label class="d-block mb-12 fw-semibold gray-color">State</label>
+                <mat-form-field appearance="fill">
+                <mat-label>Enter state</mat-label>
+                <input matInput formControlName="stateControl" readonly>
+                </mat-form-field>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="kickConnect-form-group without-icon">
+                <label class="d-block mb-12 fw-semibold gray-color">Zip Code</label>
+                <mat-form-field appearance="fill">
+                <mat-label>Enter zip code</mat-label>
+                <input matInput (change)="getCityStateInfo($event)" formControlName="zipControl">
+                </mat-form-field>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="kickConnect-form-group mb-12">
+                <mat-checkbox formControlName="isActiveControl">Remove User</mat-checkbox>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <button mat-flat-button type="submit" [disabled]="form.invalid" class="kickConnect fw-semibold">Update User</button> &nbsp;
+                <button mat-flat-button (click)="cancel($event)" class="kickConnect fw-semibold" color="warn">Cancel</button>
+            </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

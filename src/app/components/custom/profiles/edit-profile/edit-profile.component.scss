@@ -1,0 +1,11 @@
+/* edit-profile.component.scss */
+.card-image {
+    width: 50%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures the entire image is visible */
+    max-width: 50%; /* Adjust this to control the width of the image */
+    max-height: 150px; /* Adjust this to control the height of the image */
+    display: block; /* Removes any default spacing */
+    margin-left: auto; /* Pushes the image to the right */
+  }
+  

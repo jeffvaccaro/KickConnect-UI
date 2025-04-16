@@ -1,0 +1,33 @@
+            <!-- USER INFO -->
+            <li>
+                <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
+                    <!-- user.component.html -->
+                    <div class="user-info">
+                        <div class="user-initial">{{ userInitial }}</div>
+                        <div class="role-container">
+                            <div class="role-name">{{ roleName }}</div>
+                            <div class="user-name">{{ userName }}</div>
+                        </div>
+                    </div>
+                </button>
+                <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before" style="top:-10px;">
+                    <ul class="m-0">
+                        <li>
+                            <a routerLink="/profile">
+                                <i class="ri-user-3-line"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/account">
+                                <i class="ri-settings-3-line"></i> Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/logout">
+                                <i class="ri-shut-down-line"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </mat-menu>
+            </li>
+            <!-- USER INFO -->

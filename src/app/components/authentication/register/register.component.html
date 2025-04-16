@@ -1,0 +1,140 @@
+<div>
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="kickConnect-form ms-auto me-auto">
+                <div class="title">
+                    <div class="d-flex mb-10 align-items-center">
+                        <h2 class="mb-0 me-30">Get Started</h2>
+                        <img src="assets/img/logo-icon.png" alt="logo-icon">
+                    </div>
+                    <p>Already have an account? <a routerLink="/login" class="main-color fw-medium">Login now!</a></p>
+                </div>
+                <form>
+
+                    <div class="row">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Name</label>
+                        <mat-form-field appearance="fill">
+                        <i class="ri-user-3-line"></i>
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="nameControl">
+                        </mat-form-field>
+                    </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4">                       </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="kickConnect-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                                <mat-form-field appearance="fill">
+                                <i class="ri-mail-line"></i>
+                                <mat-label>Enter email address</mat-label>
+                                <input matInput formControlName="emailControl">
+                                <div *ngIf="form.get('emailControl')?.invalid && (form.get('emailControl')?.dirty || form.get('emailControl')?.touched)">
+                                    <div *ngIf="form.get('emailControl')?.errors?.['required']">Email is required.</div>
+                                    <div *ngIf="form.get('emailControl')?.errors?.['email']">Please enter a valid email address.</div>
+                                </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="kickConnect-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                                <mat-form-field appearance="fill">
+                                <i class="ri-phone-line"></i>
+                                <mat-label>Enter phone number</mat-label>
+                                <input matInput formControlName="phoneControl">
+                                    <div *ngIf="form.get('phoneControl')?.invalid && (form.get('phoneControl')?.dirty || form.get('phoneControl')?.touched)">
+                                        <div *ngIf="form.get('phoneControl')?.errors?.['required']">Phone Number is required.</div>
+                                        <div *ngIf="form.get('phoneControl')?.errors?.['pattern']">Please enter a valid Phone Number.</div>
+                                    </div>                    
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="kickConnect-form-group">
+                                <label class="d-block mb-12 fw-semibold gray-color">Address</label>
+                                <mat-form-field appearance="fill">
+                                <i class="ri-map-pin-line"></i>
+                                <mat-label>Enter Address</mat-label>
+                                <input matInput formControlName="addressControl">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="kickConnect-form-group without-icon">
+                                <label class="d-block mb-12 fw-semibold gray-color">City</label>
+                                <mat-form-field appearance="fill">
+                                <mat-label>Enter city</mat-label>
+                                <input matInput formControlName="cityControl" readonly>
+                                </mat-form-field>
+                            </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                            <div class="kickConnect-form-group without-icon">
+                                <label class="d-block mb-12 fw-semibold gray-color">State</label>
+                                <mat-form-field appearance="fill">
+                                <mat-label>Enter state</mat-label>
+                                <input matInput formControlName="stateControl" readonly>
+                                </mat-form-field>
+                            </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="kickConnect-form-group without-icon">
+                                <label class="d-block mb-12 fw-semibold gray-color">Zip Code</label>
+                                <mat-form-field appearance="fill">
+                                <mat-label>Enter zip code</mat-label>
+                                <input matInput (change)="getCityStateInfo($event)" formControlName="zipControl">
+                                </mat-form-field>
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="bg-white border-radius pt-20 ps-20 pe-20">
+                        <div class="kickConnect-form-group without-icon">
+                            <label class="d-block mb-12 fw-semibold gray-color">Name <span>*</span></label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Enter name</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="kickConnect-form-group without-icon">
+                            <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Enter email address</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <div class="kickConnect-form-group without-icon">
+                            <label class="d-block mb-12 fw-semibold gray-color">Password <span>*</span></label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Enter your password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                        <div class="kickConnect-form-group without-icon">
+                            <label class="d-block mb-12 fw-semibold gray-color">Confirm Password <span>*</span></label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Enter your password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-flat-button class="kickConnect d-block fw-semibold">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

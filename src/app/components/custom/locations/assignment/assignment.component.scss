@@ -1,0 +1,24 @@
+    .event-blue {
+        background-color: blue;
+    }
+    .event-green {
+        background-color: green;
+    }
+    .event-red {
+        background-color: red;
+    }
+
+
+    .profile-event::before {
+        content: "\e852"; /* Unicode for Remix user icon */
+        font-family: "remixicon";
+        padding-right: 5px; /* Optional: Space between icon and text */
+      }
+      
+      .no-assignment-event::before {
+        content: "\eca1"; /* Unicode for Remix user-off-line icon */
+        font-family: "remixicon";
+        padding-right: 5px; /* Optional: Space between icon and text */
+      }
+      
+      

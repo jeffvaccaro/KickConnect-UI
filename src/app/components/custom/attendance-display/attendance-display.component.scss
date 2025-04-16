@@ -1,0 +1,15 @@
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%; /* Adjust based on your layout */
+    margin-top: 20px; /* Optional spacing */
+  }
+  
+  p {
+    margin: 10px 0; /* Adds spacing between the text and QR code */
+    font-size: 18px; /* Adjust size as needed */
+    font-weight: bold; /* Makes the text stand out */
+  }

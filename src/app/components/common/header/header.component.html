@@ -1,0 +1,98 @@
+<header
+    class="header-area bg-white border-bottom-radius box-shadow"
+    [ngClass]="{'active': isToggled}"
+>
+    <div class="d-md-flex align-items-center justify-content-space-between">
+        <div class="header-left-side d-flex align-items-center">
+            <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+                <span class="top-bar"></span>
+                <span class="middle-bar"></span>
+                <span class="bottom-bar"></span>
+            </div>
+        </div>
+        <ul class="header-right-side d-flex align-items-center mt-0 mb-0">
+            <li>
+                <button mat-icon-button [matMenuTriggerFor]="notificationMenu" class="btn p-0 border-none rounded-circle position-relative notification-btn">
+                    <i class="ri-notification-3-fill"></i>
+                </button>
+                <mat-menu class="menu-dropdown" #notificationMenu="matMenu" xPosition="before">
+                    <div class="menu-header d-flex align-items-center justify-content-space-between">
+                        <h5 class="m-0">Notifications</h5>
+                        <!-- <button type="button" class="bg-transparent p-0 border-none">Mark all as read</button> -->
+                    </div>
+                    <ul class="menu-body">
+                        <li class="position-relative">
+                            <div class="d-flex">
+                                <i class="flaticon-file-1 icon"></i>
+                                <div class="title">
+                                    <h6>Coming Soon!</h6>
+                                    <span><i class="flaticon-timer"></i>2025</span>
+                                </div>
+                            </div>
+                            <a routerLink="/notifications" class="link-btn"></a>
+                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                        </li>
+                        <!-- <li class="position-relative">
+                            <div class="d-flex align-items-center">
+                                <i class="flaticon-pdf-file icon"></i>
+                                <div class="title">
+                                    <h6>Allow users to like products</h6>
+                                    <span><i class="flaticon-timer"></i> 30 mins ago</span>
+                                </div>
+                            </div>
+                            <a routerLink="/notifications" class="link-btn"></a>
+                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                        </li>
+                        <li class="position-relative">
+                            <div class="d-flex align-items-center">
+                                <i class="flaticon-to-do-list icon"></i>
+                                <div class="title">
+                                    <h6>Live visits on our site</h6>
+                                    <span><i class="flaticon-timer"></i> 5 hours ago</span>
+                                </div>
+                            </div>
+                            <a routerLink="/notifications" class="link-btn"></a>
+                            <button class="close-btn bg-transparent border-none p-0"><i class="flaticon-close"></i></button>
+                        </li> -->
+                    </ul>
+                    <!-- <div class="menu-footer">
+                        <a routerLink="/notifications" class="fw-medium position-relative">View All <i class="flaticon-chevron"></i></a>
+                    </div> -->
+                </mat-menu>
+            </li>
+            <li class="d-none d-lg-block">
+                <div class="date-btn main-color fw-semibold position-relative">
+                    <i class="ri-calendar-2-line"></i> {{ currentDate | date: 'dd MMMM yyyy' }}
+                </div>
+            </li>
+            <li>
+                <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
+                    <div class="role-container">
+                      <div class="name-container">
+                        <div class="role-name">{{ roleName }}</div>
+                        <div class="user-name">{{ userName }}</div>
+                      </div>
+                      <i class="ri-arrow-down-s-line"></i> <!-- Drop-down arrow on the same line -->
+                    </div>
+                  </button>
+                  
+                  
+                <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu">
+                  <ul class="m-0">
+                    <li>
+                      <a (click)="profile()">
+                        <i class="ri-user-3-line"></i> Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/logout">
+                        <i class="ri-shut-down-line"></i> Logout
+                      </a>
+                    </li>
+                  </ul>
+                </mat-menu>
+              </li>
+              
+        </ul>
+    </div>
+</header>

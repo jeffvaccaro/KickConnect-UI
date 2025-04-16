@@ -1,0 +1,91 @@
+<mat-stepper orientation="vertical">
+    <mat-step>
+        <ng-template matStepLabel>{{SectionHeader}}: Columns</ng-template>
+        <ng-template matStepContent>
+              <p>How many columns are in this section?</p>
+              <mat-button-toggle-group name="sectionColumns" aria-label="How many columns to display" (change)="updateColumns($event)" value="1">
+                <mat-button-toggle value="1">One</mat-button-toggle>
+                <mat-button-toggle value="2">Two</mat-button-toggle>
+                <mat-button-toggle value="3">Three</mat-button-toggle>
+              </mat-button-toggle-group><br/><br/>
+              <button mat-flat-button color="primary" class="me-15" matStepperPrevious>Back</button>
+              <button mat-flat-button color="primary" matStepperNext>Next</button>
+        </ng-template>
+    </mat-step>
+
+    <mat-step>
+    <ng-template matStepLabel>{{SectionHeader}}: Background Image</ng-template>
+    <ng-template matStepContent>
+        <p>Add Background Image?</p>
+        <input type="file" (change)="onImageUpload($event,1,'background')"><br/><br/>
+        <p><button mat-flat-button color="primary" matStepperNext>Next</button></p>
+    </ng-template>
+    </mat-step>
+
+    <mat-step>
+    <ng-template matStepLabel>{{SectionHeader}}: Text</ng-template>
+    <ng-template matStepContent>
+        <div class="form-group">
+          <mat-slide-toggle id="isTextLightOrDark" (change)="switchTextColor($event)">Light/Dark Text</mat-slide-toggle>
+      
+          <div *ngFor="let column of columns; let i = index">
+            <mat-card-content class="full-width">
+                <mat-tab-group (selectedIndexChange)="onColTabChanged($event)">
+                  <mat-tab label="Text">
+                    <br>
+                    <!-- Ensure the textbox is above the textarea -->
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Column {{ i + 1 }}: Header Text</mat-label>
+                      <input matInput type="text" [(ngModel)]="columns[i].headerText" (ngModelChange)="updateColBlockHTML()">
+                    </mat-form-field>
+              
+                    <mat-form-field appearance="fill" class="full-width">
+                      <mat-label>Column {{ i + 1 }}: Text</mat-label>
+                      <textarea matInput rows="5" [(ngModel)]="columns[i].textBlock" (ngModelChange)="updateColBlockHTML()"></textarea>
+                    </mat-form-field>
+                  </mat-tab>
+              
+                  <mat-tab label="Image">
+                    <br>
+                    <p>Add Column Image?</p>
+                    <input type="file" (change)="onImageUpload($event, 1, 'columns', i + 1)">
+                    <br/><br/>
+                  </mat-tab>
+              
+                  <mat-tab label="Video">
+                    <br> Video
+                  </mat-tab>
+                </mat-tab-group>
+              </mat-card-content>
+              
+          </div>
+          <div class="button-group">
+            <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+        </div>
+      </ng-template>
+      
+      
+      
+    </mat-step>
+
+    <!-- <mat-step>
+    <ng-template matStepLabel>Section 1: Menu</ng-template>
+    <ng-template matStepContent>
+        <form [formGroup]="menuForm" (submit)="addToHTML()">
+        <div formArrayName="menuItems">
+            <div *ngFor="let item of menuItems.controls; let i = index">
+            <div class="form-group" [formGroupName]="i">
+                <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Menu Item Name</mat-label>
+                <input matInput type="text" id="txtMenuItemName" formControlName="name">
+                </mat-form-field>
+                <button type="submit">Add Menu</button>
+            </div>
+            </div>
+        </div>
+        </form>
+    </ng-template>
+    </mat-step> -->
+</mat-stepper>

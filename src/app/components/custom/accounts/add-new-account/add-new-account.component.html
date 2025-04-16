@@ -1,0 +1,156 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Add New Account</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+        <a routerLink="/">
+            <i class="ri-home-8-line"></i>
+            Dashboard
+        </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Add New Account</li>
+    </ol>
+</div>
+  
+<mat-card class="mb-25 kickConnect-card">
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+            <div class="row">
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Account Name</label>
+                        <mat-form-field appearance="fill">
+                        <i class="ri-user-3-line"></i>
+                        <mat-label>Account Name</mat-label>
+                        <input matInput formControlName="accountName">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">User Name</label>
+                        <mat-form-field appearance="fill">
+                        <i class="ri-user-3-line"></i>
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="userName">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group without-icon">
+                        <label class="d-block mb-12 fw-semibold gray-color">Password <span>*</span></label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>   
+                </div>             
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
+                        <mat-form-field appearance="fill">
+                        <i class="ri-mail-line"></i>
+                        <mat-label>Enter email address</mat-label>
+                        <input matInput formControlName="accountEmail">
+                        <div *ngIf="form.get('emailControl')?.invalid && (form.get('emailControl')?.dirty || form.get('emailControl')?.touched)">
+                            <div *ngIf="form.get('emailControl')?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="form.get('emailControl')?.errors?.['email']">Please enter a valid email address.</div>
+                        </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Phone</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-phone-line"></i>
+                            <mat-label>Enter phone number</mat-label>
+                            <input matInput formControlName="accountPhone">
+                            <div *ngIf="form.get('accountPhone')?.invalid && (form.get('accountPhone')?.dirty || form.get('accountPhone')?.touched)">
+                                <div *ngIf="form.get('accountPhone')?.errors?.['required']">Phone Number is required.</div>
+                                <div *ngIf="form.get('accountPhone')?.errors?.['pattern']">Please enter a valid Phone Number.</div>
+                            </div>                    
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Alt. Phone</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-phone-line"></i>
+                            <mat-label>Enter phone number</mat-label>
+                            <input matInput formControlName="phone2">
+                            <div *ngIf="form.get('phone2')?.invalid && (form.get('phone2')?.dirty || form.get('phone2')?.touched)">
+                                <div *ngIf="form.get('phone2')?.errors?.['pattern']">Please enter a valid Phone Number.</div>
+                            </div>                    
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-2 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Address</label>
+                        <mat-form-field appearance="fill">
+                        <i class="ri-map-pin-line"></i>
+                        <mat-label>Enter Address</mat-label>
+                        <input matInput formControlName="accountAddress">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-1 col-sm-1">
+                    <div class="kickConnect-form-group without-icon">
+                        <label class="d-block mb-12 fw-semibold gray-color">City</label>
+                        <mat-form-field appearance="fill">
+                        <mat-label>Enter city</mat-label>
+                        <input matInput formControlName="accountCity" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-1 col-sm-1">
+                    <div class="kickConnect-form-group without-icon">
+                        <label class="d-block mb-12 fw-semibold gray-color">State</label>
+                        <mat-form-field appearance="fill">
+                        <mat-label>Enter state</mat-label>
+                        <input matInput formControlName="accountState" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-1 col-sm-1">
+                    <div class="kickConnect-form-group without-icon">
+                        <label class="d-block mb-12 fw-semibold gray-color">Zip Code</label>
+                        <mat-form-field appearance="fill">
+                        <mat-label>Enter zip code</mat-label>
+                        <input matInput (change)="getCityStateInfo($event)" formControlName="accountZip">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-1 col-sm-1">
+                    <div class="kickConnect-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Role</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-list-check"></i>
+                            <mat-label>Role</mat-label>
+                            <mat-select formControlName="role" multiple>
+                                <mat-option *ngFor="let role of roleArr; trackBy: trackByRoleId" [value]="role.roleId">
+                                  {{ role.roleName }}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <button mat-flat-button class="kickConnect d-block fw-semibold">Create Account</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

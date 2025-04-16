@@ -1,0 +1,175 @@
+<div class="create-dialog-box">
+    <div class="title d-flex align-items-center justify-content-space-between">
+      <h4 class="mb-0">{{isNew}} Event</h4>
+      <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+    </div>
+    <form [formGroup]="eventForm" (ngSubmit)="save()">
+      <input type="hidden" formControlName="accountId"/>
+      <input type="hidden" formControlName="scheduleMainId"/>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="kickConnect-form-group">
+            <mat-form-field appearance="fill">
+              <i class="ri-bookmark-2-line"></i>
+              <mat-label>Existing Event</mat-label>
+              <mat-select id="kc-select-event-list" formControlName="existingEventValue" (selectionChange)="enableDisable($event)">
+                <mat-option [id]="'event-' + eventItem.eventId" *ngFor="let eventItem of events" [value]="eventItem.eventId">
+                  {{ eventItem.eventName }}
+                </mat-option>
+                <mat-option id="newEvent" value="newEvent">Add New Event</mat-option>
+              </mat-select>  
+              <div *ngIf="eventForm.get('existingEventValue')?.touched && eventForm.get('existingEventValue')?.invalid" class="error-message">
+                Please select an Existing Event or Add New Event
+              </div>         
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12" *ngIf="isNewEvent">
+          <div class="form-group">
+            <input type="text" id="kc-textbox-event-name" class="input-control" placeholder="New Event Name *" formControlName="eventName" required>
+            <div *ngIf="eventForm.get('eventName')?.touched && eventForm.get('eventName')?.invalid" class="error-message">
+              Event Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12" >
+          <div class="kickConnect-form-group custom-style">
+              <mat-form-field appearance="fill">
+                  <mat-label>Event Description</mat-label>
+                  <textarea matInput rows="6" id="kc-text-area-event-description" formControlName="eventDescription"></textarea>
+                  <div *ngIf="eventForm.get('eventDescription')?.touched && eventForm.get('eventDescription')?.invalid" class="error-message">
+                    Event Description is required
+                  </div>
+              </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-7 col-md-7">
+          <div class="kickConnect-form-group">
+            <mat-form-field appearance="fill">
+              <i class="ri-bookmark-2-line"></i>
+              <mat-label>Apply to Location(s)</mat-label>
+              <mat-select id="kc-select-location-values" formControlName="locationValues">
+                <mat-option [id]="'location-' + locationItem.locationName" *ngFor="let locationItem of locations" [value]="locationItem.locationId">
+                  {{ locationItem.locationName }}
+                </mat-option>
+                <mat-option id="-99" [value]="-99">Apply this schedule to ALL locations</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5">
+          <div class="kickConnect-form-group mb-12" style="padding-top:15px;">
+            <!-- <mat-checkbox id="kc-checkbox-isRepeat" formControlName="isRepeat">Event Repeats?</mat-checkbox> -->
+            <mat-slide-toggle id="kc-slide-isRepeat" formControlName="isRepeat" >Event Repeats?</mat-slide-toggle>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="kickConnect-form-group">
+              <mat-form-field appearance="fill" class="date-input">
+                <mat-label style="padding-left:30px;">Date</mat-label>
+                <input id="kc-selectedDate" matInput 
+                  [matDatepicker]="dtPicker" formControlName="selectedDate" 
+                  (focus)="dtPicker.open()" style="padding-left:25px;">
+                <i class="ri-calendar-schedule-line" (click)="dtPicker.open()" style="padding-left:27px;"></i>
+                <mat-datepicker #dtPicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="kickConnect-form-group">
+              <mat-form-field appearance="fill">
+                <mat-label>Time</mat-label>
+                <input id="kc-selectedTime" matInput placeholder="Time" [ngxTimepicker]="timePicker" formControlName="selectedTime">
+                <ngx-material-timepicker #timePicker></ngx-material-timepicker>
+                <i class="ri-time-line"></i>
+              </mat-form-field>
+            </div>
+          </div>
+
+           <div class="col-lg-4 col-md-4">
+            <div class="kickConnect-form-group">
+              <mat-form-field appearance="fill">
+                <i class="ri-hourglass-2-fill"></i>
+                <mat-label>Duration</mat-label>
+                <mat-select id="kc-select-duration" formControlName="duration">
+                  <mat-option [id]="'duration-' + duration.durationValue" *ngFor="let duration of durations" [value]="duration.durationValue">
+                    {{ duration.durationText }}
+                  </mat-option>
+                </mat-select>              
+              </mat-form-field>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <div class="kickConnect-form-group mb-12" style="padding-top:25px; margin:25px;">
+            <mat-slide-toggle id="kc-slide-isReservation" formControlName="isReservation" (change)="onReservationChange($event)">Set Reservation Count?</mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4">
+          <div class="kickConnect-form-group" *ngIf="setReservation">
+            <label class="d-block mb-12 fw-semibold gray-color">Reservation Count<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i><mat-icon>people</mat-icon></i>
+               <mat-select id="kc-select-reservation-count" formControlName="reservationCount">
+                <mat-option [id]="'resCount-' + resCount.reservationCountId" *ngFor="let resCount of reservationCounts" [value]="resCount.reservationCountId">
+                  {{ resCount.reservationCountValue }}
+                </mat-option>
+              </mat-select>              
+            </mat-form-field>
+          </div>
+        </div>
+
+
+      </div>
+       
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <div class="kickConnect-form-group mb-12" style="padding-top:25px; margin:25px;">
+            <!-- <mat-checkbox id="kc-select-isCostToAttend" formControlName="isCostToAttend" (change)="onCostToAttendChange($event)">Set Cost to Attend?</mat-checkbox> -->
+            <mat-slide-toggle id="kc-slide-isCostToAttend" formControlName="isCostToAttend" (change)="onCostToAttendChange($event)">Set Cost to Attend?</mat-slide-toggle>
+         
+          </div>
+        </div>
+        
+
+        <div class="col-lg-4 col-md-4">
+          <div class="kickConnect-form-group" *ngIf="setCostToAttend">
+            <label class="d-block mb-12 fw-semibold gray-color">Cost to Attend<span>*</span></label>
+            <mat-form-field appearance="fill">
+              <i><mat-icon> attach_money</mat-icon></i>
+              
+              <input matInput id="kc-textbox-costToAttend" placeholder="Cost to Attend" formControlName="costToAttend">
+            </mat-form-field>
+            <div *ngIf="eventForm.get('costToAttend')?.touched && eventForm.get('costToAttend')?.invalid" class="error-message">
+              Must be greater than $0
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+     
+      <div class="sticky-buttons">
+        <button type="button" id="kc-btn-delete-event" class="warn" (click)="deleteEvent($event)"><i class="ri-delete-bin-fill"></i>Delete Event</button>
+        <button type="button" id="kc-btn-cancel" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+        <button type="submit" id="kc-btn-submit-event" ><i class="ri-add-fill"></i> Save Event</button>
+      </div>
+
+
+    </form>
+  </div>
+  

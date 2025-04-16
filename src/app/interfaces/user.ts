@@ -1,0 +1,20 @@
+export interface IUser {
+    accountId: number,
+    address: string,
+    city: string,
+    email: string,
+    isActive: boolean,
+    name: string,
+    phone: string,
+    phone2: string,
+    photoURL: string,
+    profileDescription: string,
+    profileId: number,
+    profileSkills: string[],
+    profileURL: string,
+    roleId: string[],
+    roleNames: string,
+    state: string,
+    userId: number,
+    zip: number
+}

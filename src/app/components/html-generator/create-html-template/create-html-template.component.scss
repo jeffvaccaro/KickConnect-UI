@@ -1,0 +1,85 @@
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.theme-options {
+  display: flex;
+  gap: 2px; 
+}
+
+.theme-box {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  margin-right: 2px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  position: relative; 
+}
+
+.theme-box.active {
+  border: 2px solid #000;
+}
+
+.theme-bw {
+  background-color: #000; 
+  color: #fff;
+}
+
+.theme-wb {
+  background-color: #fff; 
+  color: #000;
+}
+
+.theme-rw {
+  background-color: #f00; 
+  color: #fff;
+}
+
+.theme-wr {
+  background-color: #fff; 
+  color: #f00;
+}
+
+.theme-rb {
+  background-color: #f00;
+  color: #000;
+}
+
+.theme-br {
+  background-color: #000; 
+  color: #f00;
+}
+
+.theme-gb {
+  background-color: #FFD700;
+  color: #000;
+}
+
+.theme-gw {
+  background-color: #FFD700;
+  color: #fff;
+}
+
+
+.theme-bg {
+  background-color: #000;
+  color: #FFD700;
+}
+
+.theme-box > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  color: inherit; /* Inherit the foreground color from the theme */
+}

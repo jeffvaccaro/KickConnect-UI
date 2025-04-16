@@ -1,0 +1,129 @@
+<div
+    class="sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="themeService.isSidebarDark()"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+>
+    <div class="logo bg-white">
+        <a routerLink="/" class="d-flex align-items-center">
+            <img src="assets/img/logo-icon.png" alt="logo">
+            <span>kickConnect</span>
+        </a>
+    </div>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                    <span class="sub-title gray-color">MAIN</span>
+                    <mat-expansion-panel id="expansion-panel-dashboard" (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-menu-1"></i>
+                                <span class="title">Dashboard</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu-Dashboard">
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Super Admin'])">
+                                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Super Admin
+                                </a>
+                            </li>
+                            <li class="sidemenu-item"  *ngIf="hasRoles(['Owner'])">
+                                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Owner
+                                </a>
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Admin'])">
+                                <a routerLink="/analytics" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Admin
+                                </a>
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Instructor'])">
+                                <a routerLink="/project-management" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Instructor
+                                </a>
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Staff'])">
+                                <a routerLink="/project-management" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Staff
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                    <span class="sub-title gray-color">Support</span>
+                    <mat-expansion-panel id="expansion-panel-support" (opened)="panelOpenState = true" (closed)="panelOpenState = true" [expanded]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-layer"></i>
+                                <span class="title">Administration</span>
+                                <span class="badge">{{ availableOptions }}</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>  
+                        <ul id="sidebar-sub-menu-Administration" class="sidebar-sub-menu">
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Super Admin'])" #option>
+                                <a routerLink="/app-account-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">                                
+                                    Accounts
+                                </a>
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Super Admin', 'Owner', 'Admin'])" #option>
+                                <a routerLink="/app-user-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">                                
+                                    Users
+                                </a>
+                            </li>
+                            <li class="sidemenu-item"  *ngIf="hasRoles(['Owner', 'Admin', 'Staff'])" #option>
+                                <a routerLink="/app-location-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Locations
+                                </a>                                
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-event-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Events
+                                </a>                                    
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-scheduler" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Scheduler
+                                </a>                                    
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-role-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Roles
+                                </a>    
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-skill-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Skills
+                                </a>    
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-profile-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Profiles
+                                </a>                                    
+                            </li>
+                            <li class="sidemenu-item" *ngIf="hasRoles(['Owner', 'Admin'])" #option>
+                                <a routerLink="/app-create-html-template" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    HTML Generator
+                                </a>                                    
+                            </li>     
+                            <li class="sidemenu-item" #option>
+                                <a routerLink="/app-class-login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    QR Code Login
+                                </a>                                    
+                            </li>                                                        
+                        </ul>                                              
+                    </mat-expansion-panel>
+                    <a routerLink="/logout" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="flaticon-tools"></i>
+                        <span class="title">Logout</span>
+                    </a>
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

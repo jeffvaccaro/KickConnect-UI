@@ -1,0 +1,92 @@
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">New Event Details</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/">
+          <i class="ri-home-8-line"></i>
+          Dashboard
+        </a>
+      </li>
+      <li class="breadcrumb-item fw-semibold">Add New Event</li>
+    </ol>
+  </div>
+  
+  <mat-card class="mb-25 kickConnect-card">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="kickConnect-form-group">
+              <label class="d-block mb-12 fw-semibold gray-color">Event Name<span>*</span></label>
+              <mat-form-field appearance="fill">
+                <i class="ri-information-line"></i>
+                <mat-label>Event Name</mat-label>
+                <input matInput formControlName="nameControl">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="kickConnect-form-group">
+              <label class="d-block mb-12 fw-semibold gray-color">Event Description <span>*</span></label>
+              <mat-form-field appearance="fill">
+                <i class="ri-quote-text"></i>
+                <mat-label>Event Description</mat-label>
+                <input matInput formControlName="descriptionControl">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="kickConnect-form-group" style="padding-top:25px; margin:25px;">
+                <mat-slide-toggle formControlName="isReservation" (change)="onReservationChange($event)">Set Reservation Count?</mat-slide-toggle>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="kickConnect-form-group" *ngIf="setReservation">
+              <label class="d-block mb-12 fw-semibold gray-color">Reservation Count<span>*</span></label>
+              <mat-form-field appearance="fill">
+                <i><mat-icon>people</mat-icon></i>
+                <mat-select formControlName="reservationCount">
+                  <mat-option *ngFor="let resCount of reservationCounts" [value]="resCount.reservationCountId">
+                    {{ resCount.reservationCountValue }}
+                  </mat-option>
+                </mat-select>              
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3">
+            <div class="kickConnect-form-group" style="padding-top:25px; margin:25px;">
+                <mat-slide-toggle formControlName="isCostToAttend" (change)="onCostToAttendChange($event)">Set Cost Attend?</mat-slide-toggle>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-3">
+            <div class="kickConnect-form-group" *ngIf="setCostToAttend">
+              <label class="d-block mb-12 fw-semibold gray-color">Cost to Attend<span>*</span></label>
+              <mat-form-field appearance="fill">
+                <i><mat-icon> attach_money</mat-icon></i>
+                
+                <input matInput placeholder="Cost to Attend" formControlName="costToAttend">
+              </mat-form-field>
+              <div *ngIf="form.get('costToAttend')?.touched && form.get('costToAttend')?.invalid" class="error-message">
+                Must be greater than $0
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/><br/><br/>
+        <div class="row">
+          <div mat-dialog-actions>
+            <button  mat-flat-button  (click)="cancel($event)" class="kickConnect fw-semibold gray"><i class="ri-close-fill"></i>Cancel</button>
+            <button  mat-flat-button  type="submit" [disabled]="form.invalid" class="kickConnect fw-semibold black"><i class="ri-add-fill"></i>Add Event</button> &nbsp;
+          </div>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

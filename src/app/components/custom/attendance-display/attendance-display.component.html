@@ -1,0 +1,9 @@
+<div class="center-content">
+    <p *ngIf="classArr.length > 0">{{ classArr[0]?.eventName }}</p>
+    <qrcode 
+        [qrdata]="classArr[0]?.eventId?.toString() || ''" 
+        [width]="256" 
+        [errorCorrectionLevel]="'M'" 
+        [allowEmptyString]="true">
+    </qrcode>
+</div>
