@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: "KickConnect-UI"
+  - appRoot: "KickConnect-UI/src"
     frontend:
       phases:
         preBuild:
@@ -12,9 +12,12 @@ applications:
           commands:
             - ls -alh
             - npm run build
+            - ls -alh dist
+            - ls -alh dist/kickConnect
       artifacts:
         baseDirectory: dist/kickConnect/browser
         files:
           - '**/*'
       cache:
         paths:
+         - node_modules/**/*
