@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: "KC_UI"
+  - appRoot: "KickConnect-UI"
     frontend:
       phases:
         preBuild:
