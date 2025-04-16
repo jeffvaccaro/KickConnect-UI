@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../services/loginService';
 
 @Injectable()
-export class authinterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private modalService: ModalService,
     private router: Router,
