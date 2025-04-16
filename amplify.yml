@@ -1,26 +1,28 @@
 version: 1
-applications:
-  - appRoot: "."
-    frontend:
-      phases:
-        preBuild:
-          commands:
-          - pwd
-          - ls -alh
-          - node -v
-          - npm -v
-          - npm install
-        build:
-          commands:
-            - pwd
-            - ls -alh
-            - npm run build
-            - ls -alh dist
-            - ls -alh dist/kickConnect
-      artifacts:
-        baseDirectory: dist/kickConnect/browser
-        files:
-          - '**/*'
-      cache:
-        paths:
-         - node_modules/**/*
+# No 'applications' wrapper
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # These commands now run directly in the cloned root (/codebuild/output/src.../src/KickConnect-UI/)
+        - pwd
+        - ls -alh
+        - node -v
+        - npm -v
+        - npm install
+    build:
+      commands:
+        - pwd
+        - ls -alh
+        - npm run build
+        - ls -alh dist
+        - ls -alh dist/kickConnect
+  artifacts:
+    # Path relative to the repository root (KickConnect-UI/)
+    baseDirectory: dist/kickConnect/browser # Assuming build outputs directly into dist/
+    files:
+      - '**/*'
+  cache:
+    paths:
+      # Path relative to the repository root (KickConnect-UI/)
+      - node_modules/**/*
