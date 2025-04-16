@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/authService';
 import { AuthGuard } from './guards/AuthGuard';
-import { AuthInterceptor } from './interceptor/AuthInterceptor';
+import { authinterceptor } from './interceptor/authinterceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -18,6 +18,6 @@ export const appConfig: ApplicationConfig = {
         provideClientHydration(), 
         provideAnimationsAsync(), 
         importProvidersFrom(HttpClientModule, CommonModule),
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: authinterceptor, multi: true }
     ]
 };
