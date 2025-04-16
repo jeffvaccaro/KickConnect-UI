@@ -7,7 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/authService';
 import { AuthGuard } from './guards/AuthGuard';
-import { authinterceptor } from './interceptor/authinterceptor';
+import { authinterceptor } from './Interceptor/authinterceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
