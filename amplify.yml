@@ -1,15 +1,18 @@
 version: 1
 applications:
-  - appRoot: "KickConnect-UI"
+  - appRoot: "."
     frontend:
       phases:
         preBuild:
           commands:
+          - pwd
+          - ls -alh
           - node -v
           - npm -v
           - npm install
         build:
           commands:
+            - pwd
             - ls -alh
             - npm run build
             - ls -alh dist
