@@ -1,105 +1,78 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomizerSettingsService } from '../../customizer-settings/customizer-settings.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-
-import { LoginService } from '../../../services/loginService';
-import { AuthService } from '../../../services/authService';
-import { UserService } from '../../../services/user.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from './../../../services/authService'
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    imports: [
-    CommonModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
-    ReactiveFormsModule
-],
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
 })
-export class LoginComponent {
-    loginForm: FormGroup;
-    email: string = '';
-    password: string = '';
+export class LoginComponent implements OnInit {
+  authInProgress = false;
+  authError: string | null = null;
+  
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    console.log('LoginComponent initialized');
     
-    hide = true;
-
-    constructor(
-        public themeService: CustomizerSettingsService,
-        private fb: FormBuilder, 
-        private loginService: LoginService, 
-        private authService: AuthService,  
-        private userService: UserService,
-        private router: Router) {
-          this.loginForm = this.fb.group({
-            // email: ['admin@admin.com', [Validators.required, Validators.email]],
-            // password: ['admin12345', Validators.required]
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
-          });
-        }
-
-    toggleTheme() {
-        this.themeService.toggleTheme();
+    // Check if the user is already authenticated
+    if (this.authService.isAuthenticatedUser()) {
+      console.log('User is already authenticated');
+      this.router.navigate(['/dashboard']);
+      return;
     }
-
-    toggleCardBorderTheme() {
-        this.themeService.toggleCardBorderTheme();
-    }
-
-    toggleCardBorderRadiusTheme() {
-        this.themeService.toggleCardBorderRadiusTheme();
-    }
-
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
-
-    onSubmit() {
-      if (this.loginForm.valid) {
-        const { email, password } = this.loginForm.value;
-        this.loginService.login(email, password).subscribe({
-          next: response => {
-            const token = response.token;
-            const decodedToken: any = this.decodeToken(token);
-            const expiration = decodedToken.exp * 1000; // Convert to milliseconds
-            this.authService.setToken(token, new Date(expiration).toISOString());
-            this.userService.setAccountCode(response.accountCode);
-            this.userService.setAccountId(response.accountId);
-            this.userService.setUserName(response.name);
-            this.userService.setRoleName(response.role);
     
-            // Log before navigation
-            console.log('Login successful, navigating to root path');
-            
-            // Navigate to the root path to trigger DynamicComponent
-            this.router.navigate(['/dashboard']);
-          },
-          error: error => {
-            console.error('Login failed', error); // Handle login error
-          }
-        });
+    // Handle the auth code if it's in the URL
+    this.route.queryParams.subscribe(params => {
+      const code = params['code'];
+      if (code) {
+        console.log('Authorization code detected in URL:', code);
+        this.handleAuthCode(code);
       }
-    }
+    });
+  }
+
+  // Handle the authorization code from Cognito
+  handleAuthCode(code: string) {
+    this.authInProgress = true;
+    console.log('Processing authorization code...');
     
-    private decodeToken(token: string): any {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
+    this.authService.exchangeCodeForTokens(code).subscribe({
+      next: (tokens) => {
+        console.log('Successfully exchanged code for tokens');
+        
+        // Clean up the URL and navigate to dashboard
+        this.router.navigate(['/dashboard'], { replaceUrl: true });
+      },
+      error: (error) => {
+        console.error('Error exchanging code for tokens:', error);
+        this.authError = 'Failed to complete authentication. Please try again.';
+        this.authInProgress = false;
+      }
+    });
+  }
+
+  // This is the method called from the button click
+  loginWithCognito() {
+    this.authInProgress = true;
+    this.authError = null;
     
-      return JSON.parse(jsonPayload);
+    try {
+      // Use our AuthService to get the login URL
+      const loginUrl = this.authService.getLoginUrl();
+      console.log('Redirecting to Cognito login:', loginUrl);
+      window.location.href = loginUrl;
+    } catch (error) {
+      console.error('Error initiating sign-in:', error);
+      this.authError = 'Failed to initiate login process';
+      this.authInProgress = false;
     }
   }
+}

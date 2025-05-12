@@ -1,200 +1,156 @@
-.kickConnect-form {
-    max-width: 510px;
-    --mat-icon-color: var(--mainColor);
-
-    .title {
-        margin-bottom: 30px;
-
-        p {
-            font-size: 18px;
-        }
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #5b86e5, #36d1dc);
+    padding: 20px;
+  }
+  
+  .login-container {
+    max-width: 480px;
+    width: 100%;
+  }
+  
+  .logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    .logo {
+      height: 80px;
+      margin-bottom: 15px;
     }
-    .login-with-socials {
-        margin-bottom: 25px;
-
-        .mdc-button {
-            margin-top: 0;
-            font-size: 15px !important;
-            padding: 17px 25px 17px 60px !important;
-
-            img {
-                top: 50%;
-                position: absolute;
-                transform: translateY(-50%);
-                margin: {
-                    left: -35px;
-                };
-            }
-            &.gray {
-                border: 1px solid #EDEFF5 !important;
-                background-color: var(--whiteColor) !important;
-            }
-        }
+    
+    h1 {
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .or {
-        margin-bottom: 25px;
-        color: #777E90;
-        line-height: 1;
-        z-index: 1;
-
-        span {
-            display: inline-block;
-            background: #f5f5f5;
-            padding: {
-                left: 15px;
-                right: 15px;
-            };
-        }
-        &::before {
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            content: '';
-            z-index: -1;
-            position: absolute;
-            background: #E2E8F0;
-            transform: translateY(-50%);
-        }
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+    .card-header {
+      padding: 30px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+      
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0 0 10px;
+        color: #333;
+      }
+      
+      p {
+        color: #666;
+        margin: 0;
+        font-size: 16px;
+      }
     }
-    .mdc-button {
-        margin-top: 20px;
-        padding: 17px 35px !important;
-        font: {
-            size: 18px !important;
-            family: var(--headingFontFamily) !important;
-        };
+    
+    .card-body {
+      padding: 30px;
     }
-    .info {
-        margin-top: 15px;
-
+    
+    .card-footer {
+      padding: 20px 30px;
+      background-color: #f9f9f9;
+      text-align: center;
+      border-top: 1px solid #f0f0f0;
+      
+      p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+        
         a {
-            &:hover {
-                color: var(--blackColor) !important;
-            }
+          color: #3f86f2;
+          text-decoration: none;
+          font-weight: 500;
+          
+          &:hover {
+            text-decoration: underline;
+          }
         }
+      }
     }
-}
-.component-dark-theme {
-    .kickConnect-form {
-        .login-with-socials {
-            .mdc-button {
-                &.gray {
-                    border-color: #1f2226 !important;
-                    background-color: #1e2227 !important;
-                }
-            }
-        }
-        .or {
-            color: #828690;
+  }
+  
+  .btn-cognito {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px;
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
     
-            span {
-                background: #0d1015;
-            }
-            &::before {
-                background: #1f2226;
-            }
-        }
-        .info {
-            a {
-                &:hover {
-                    color: var(--whiteColor) !important;
-                }
-            }
-        }
+    svg {
+      margin-right: 10px;
     }
-    &.card-borderd-theme {
-        .bg-white {
-            box-shadow: var(--borderWhiteBoxShadow);
-        }
-    }
-}
-.card-borderd-theme {
-    .bg-white {
-        box-shadow: var(--borderBoxShadow);
-    }
-}
-.card-border-radius {
-    .bg-white {
-        border-radius: 0 !important;
-    }
-}
-.component-rtl-enabled {
-    .kickConnect-form {
-        .login-with-socials {
-            .mdc-button {
-                padding: {
-                    left: 25px !important;
-                    right: 60px !important;
-                };
-                img {
-                    margin: {
-                        left: 0;
-                        right: -35px;
-                    };
-                }
-            }
-        }
-        .me-30 {
-            margin-right: 0 !important;
-        }
-    }
-}
-
-@media only screen and (max-width : 767px) {
-
-    .kickConnect-form {
-        max-width: 100%;
-        padding: {
-            left: 15px;
-            right: 15px;
-        };
-        .title {
-            margin-bottom: 20px;
     
-            p {
-                font-size: 15px;
-            }
-        }
-        .login-with-socials {
-            margin-bottom: 20px;
-    
-            .mdc-button {
-                margin-bottom: 15px;
-            }
-        }
-        .or {
-            margin-bottom: 20px;
-        }
-        .mdc-button {
-            margin-top: 15px;
-            font-size: 15px !important;
-            padding: 17px 30px !important;
-        }
+    &:hover {
+      background-color: #ff8800;
     }
-
-}
-
-@media only screen and (min-width : 768px) and (max-width : 991px) {
-
-    .kickConnect-form {
-        .title {
-            margin-bottom: 15px;
     
-            p {
-                font-size: 15px;
-            }
-        }
-        .login-with-socials {
-            margin-bottom: 20px;
-        }
-        .or {
-            margin-bottom: 20px;
-        }
-        .mdc-button {
-            margin-top: 15px;
-            font-size: 16px !important;
-        }
+    &:active {
+      background-color: #e68a00;
     }
-
-}
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+    
+    svg {
+      color: #3f86f2;
+      margin-bottom: 10px;
+    }
+    
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .logo-container {
+      .logo {
+        height: 60px;
+      }
+      
+      h1 {
+        font-size: 28px;
+      }
+    }
+    
+    .features {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }

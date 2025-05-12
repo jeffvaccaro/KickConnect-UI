@@ -1,54 +1,34 @@
-<div
-    class="h-100vh pt-50 pb-50"
-    [class.component-dark-theme]="themeService.isDark()"
-    [class.card-borderd-theme]="themeService.isCardBorder()"
-    [class.card-border-radius]="themeService.isCardBorderRadius()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
->
-    <div class="d-table">
-        <div class="d-table-cell">
-            <div class="kickConnect-form ms-auto me-auto">
-                <div class="title">
-                    <div class="d-flex mb-10 align-items-center">
-                        <h2 class="mb-0 me-30">Get Started</h2>
-                        <img src="assets/img/logo-icon.png" alt="logo-icon">
-                    </div>
-                    <!-- <p>Don’t have an account? <a routerLink="/register" class="main-color fw-medium">Register now!</a></p> -->
-                     <p>Lots Coming Soon!</p>
-                </div>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div class="bg-white border-radius pt-20 ps-20 pe-20">
-                        <div class="kickConnect-form-group without-icon">
-                            <label class="d-block mb-12 fw-semibold gray-color">Email Address <span>*</span></label>
-                            <mat-form-field appearance="fill">
-                                <mat-label for="email">Enter email address</mat-label>
-                                <input matInput id="email" formControlName="email" type="email">
-                                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                                    <!-- Display email validation errors here -->
-                                </div>
-                            </mat-form-field>
-                        </div>
-                        <div class="kickConnect-form-group without-icon">
-                            <label class="d-block mb-12 fw-semibold gray-color">Password <span>*</span></label>
-                            <mat-form-field appearance="fill">
-                                <mat-label>Enter your password</mat-label>
-                                <input matInput id="password" formControlName="password" [type]="hide ? 'password' : 'text'">
-                                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                                    <!-- Display password validation errors here -->
-                                </div>                                
-                                <button type="submit" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" [disabled]="loginForm.invalid">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <!-- <div class="d-flex info align-items-center justify-content-space-between">
-                        <mat-checkbox class="gray-color">Remember me</mat-checkbox>
-                        <a routerLink="/forgot-password" class="d-inline-block main-color fw-medium">Forgot your password?</a>
-                    </div> -->
-                    <button id="kc-btn-log-in" mat-flat-button class="kickConnect d-block fw-semibold">Log In</button>
-                </form>
-            </div>
-        </div>
+<div class="login-page">
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="KickConnect Logo" class="logo">
+      <h1>KickConnect</h1>
     </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to continue to KickConnect</p>
+      </div>
+      
+      <div class="card-body">
+        <button (click)="loginWithCognito()" class="btn-cognito" [disabled]="authInProgress">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span *ngIf="!authInProgress">Sign in with Cognito</span>
+          <span *ngIf="authInProgress">Signing in...</span>
+        </button>
+        
+        <div *ngIf="authError" class="error-message">
+          {{ authError }}
+        </div>
+        
+        <!-- Rest of your features section -->
+      </div>
+    </div>
+  </div>
 </div>

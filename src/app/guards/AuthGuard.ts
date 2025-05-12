@@ -3,29 +3,21 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthService } from '../services/authService';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const isAuthenticated = this.authService.isAuthenticated();
-    const currentPath = route.routeConfig?.path || '';
-    const publicRoutes = ['register', 'reset-password'];
-  
-    if (publicRoutes.includes(currentPath)) {
-      console.log('Allowed public route:', currentPath);
+    console.log('AuthGuard checking authentication...');
+    
+    if (this.authService.isAuthenticatedUser()) {
+      console.log('AuthGuard - User is authenticated');
       return true;
     }
-  
-    if (isAuthenticated) {
-      console.log('AuthGuard - isAuthenticated:', isAuthenticated);
-      return true;
-    } else {
-      console.log('AuthGuard: Redirecting to authentication');
-      this.router.navigate(['logout']);
-      return false;
-    }
+    
+    console.log('AuthGuard - User is not authenticated, redirecting to login');
+    this.router.navigate(['/login']);
+    return false;
   }
-  
 }

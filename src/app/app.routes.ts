@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/AuthGuard';
 import { RoleGuard } from './guards/RoleGuard';
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
@@ -54,41 +54,40 @@ const mainRoutes: Routes = [
     path: 'dashboard',
     component: DynamicComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRoles: ['Owner', 'Super Admin', 'Admin', 'Staff'] }
-  },  
+    data: { expectedRoles: ['Owner', 'Super Admin', 'Admin', 'Staff'] },
+  },
   {
     path: 'owner',
     component: OwnerComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRoles: ['Owner'] }
+    data: { expectedRoles: ['Owner'] },
   },
   {
     path: 'super-admin',
     component: SuperAdminComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRoles: ['Super Admin'] }
+    data: { expectedRoles: ['Super Admin'] },
   },
   {
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRoles: ['Admin'] }
+    data: { expectedRoles: ['Admin'] },
   },
   {
     path: 'staff',
     component: StaffComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { expectedRoles: ['Staff'] }
+    data: { expectedRoles: ['Staff'] },
   },
-  
   {
     path: 'not-authorized',
-    component: AuthenticationComponent
+    component: AuthenticationComponent,
   },
   { path: 'app-location-list', component: LocationListComponent, canActivate: [AuthGuard] },
   { path: 'app-add-new-location', component: AddNewLocationComponent, canActivate: [AuthGuard] },
   { path: 'app-edit-location/:locationId', component: EditLocationComponent, canActivate: [AuthGuard] },
-  { path: 'app-assignments/:locationId', component: AssignmentComponent, canActivate: [AuthGuard]},
+  { path: 'app-assignments/:locationId', component: AssignmentComponent, canActivate: [AuthGuard] },
   { path: 'app-user-list', component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'app-add-new-user', component: AddNewUserComponent, canActivate: [AuthGuard] },
   { path: 'app-edit-user/:userId', component: EditUserComponent, canActivate: [AuthGuard] },
@@ -105,44 +104,39 @@ const mainRoutes: Routes = [
   { path: 'app-edit-profile/:userId', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'app-add-new-account', component: AddNewAccountComponent, canActivate: [AuthGuard] },
   { path: 'app-account-list', component: AccountListComponent, canActivate: [AuthGuard] },
-
-  { path: 'app-add-new-skill', component: AddNewSkillComponent, canActivate: [AuthGuard]},
-  { path: 'app-edit-skill/:skillId', component: EditSkillComponent, canActivate: [AuthGuard]},
-  { path: 'app-skill-list', component: SkillListComponent, canActivate: [AuthGuard]},
-  
-  {path: 'app-skills-autocomplete', component: SkillsAutocompleteComponent},
-
+  { path: 'app-add-new-skill', component: AddNewSkillComponent, canActivate: [AuthGuard] },
+  { path: 'app-edit-skill/:skillId', component: EditSkillComponent, canActivate: [AuthGuard] },
+  { path: 'app-skill-list', component: SkillListComponent, canActivate: [AuthGuard] },
+  { path: 'app-skills-autocomplete', component: SkillsAutocompleteComponent },
   { path: 'app-create-html-template', component: CreateHtmlTemplateComponent },
-  { path: 'app-stepper', component:StepperComponent},
-  { path: 'app-class-login', component:AttendanceDisplayComponent},
-  
+  { path: 'app-stepper', component: StepperComponent },
+  { path: 'app-class-login', component: AttendanceDisplayComponent },
   { path: 'error', component: InternalErrorComponent },
   { path: 'error-500', component: InternalErrorComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full' // Ensure redirection only happens for the exact empty path
+    pathMatch: 'full', // Ensure redirection only happens for the exact empty path
   },
   {
     path: '',
     component: AuthenticationComponent,
-    children: authRoutes
+    children: authRoutes,
   },
   {
     path: '',
     canActivate: [AuthGuard],
-    children: mainRoutes
+    children: mainRoutes,
   },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
